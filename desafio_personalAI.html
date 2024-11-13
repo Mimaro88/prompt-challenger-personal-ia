@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário de Treino Personalizado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question label {
+            font-weight: bold;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f7e7;
+            border-left: 5px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Questionário de Treino Personalizado</h1>
+
+    <!-- Pergunta 1: Necessidade de Adaptação -->
+    <div class="question">
+        <label for="adaptacao">Você possui alguma necessidade de adaptação no treino? (Exemplo: tendinite, cirurgia recente, etc.)</label><br>
+        <div class="options">
+            <input type="radio" id="sim" name="adaptacao" value="sim">
+            <label for="sim">Sim</label><br>
+            <input type="radio" id="nao" name="adaptacao" value="nao">
+            <label for="nao">Não</label>
+        </div>
+    </div>
+
+    <!-- Pergunta 2: Somatotipo -->
+    <div class="question">
+        <label for="somatotipo">Qual é o seu somatotipo?</label><br>
+        <div class="options">
+            <input type="radio" id="ectomorfo" name="somatotipo" value="ectomorfo">
+            <label for="ectomorfo">Ectomorfo</label><br>
+            <input type="radio" id="mesomorfo" name="somatotipo" value="mesomorfo">
+            <label for="mesomorfo">Mesomorfo</label><br>
+            <input type="radio" id="endomorfo" name="somatotipo" value="endomorfo">
+            <label for="endomorfo">Endomorfo</label>
+        </div>
+    </div>
+
+    <!-- Pergunta 3: Frequência de treino -->
+    <div class="question">
+        <label for="frequencia">Quantos dias por semana você treina?</label><br>
+        <div class="options">
+            <input type="radio" id="1-dia" name="frequencia" value="1">
+            <label for="1-dia">1 dia</label><br>
+            <input type="radio" id="3-dias" name="frequencia" value="3">
+            <label for="3-dias">3 dias</label><br>
+            <input type="radio" id="5-dias" name="frequencia" value="5">
+            <label for="5-dias">5 dias</label>
+        </div>
+    </div>
+
+    <!-- Pergunta 4: Tipo de treino -->
+    <div class="question">
+        <label for="tipo">Qual é o tipo de treino que você prefere?</label><br>
+        <div class="options">
+            <input type="radio" id="funcional" name="tipo" value="funcional">
+            <label for="funcional">Funcional</label><br>
+            <input type="radio" id="academia" name="tipo" value="academia">
+            <label for="academia">Academia</label><br>
+            <input type="radio" id="ar-livre" name="tipo" value="ar-livre">
+            <label for="ar-livre">Ar Livre</label><br>
+            <input type="radio" id="cardio" name="tipo" value="cardio">
+            <label for="cardio">Cardio</label><br>
+            <input type="radio" id="hiit" name="tipo" value="hiit">
+            <label for="hiit">HIIT</label>
+        </div>
+    </div>
+
+    <!-- Pergunta 5: Nível de experiência -->
+    <div class="question">
+        <label for="experiencia">Qual é o seu nível de experiência?</label><br>
+        <div class="options">
+            <input type="radio" id="iniciante" name="experiencia" value="iniciante">
+            <label for="iniciante">Iniciante</label><br>
+            <input type="radio" id="intermediario" name="experiencia" value="intermediario">
+            <label for="intermediario">Intermediário</label><br>
+            <input type="radio" id="avancado" name="experiencia" value="avancado">
+            <label for="avancado">Avançado</label>
+        </div>
+    </div>
+
+    <!-- Pergunta 6: Objetivo -->
+    <div class="question">
+        <label for="objetivo">Qual é o seu objetivo principal?</label><br>
+        <div class="options">
+            <input type="radio" id="hipertrofia" name="objetivo" value="hipertrofia">
+            <label for="hipertrofia">Hipertrofia</label><br>
+            <input type="radio" id="forca" name="objetivo" value="forca">
+            <label for="forca">Força</label><br>
+            <input type="radio" id="resistencia" name="objetivo" value="resistencia">
+            <label for="resistencia">Resistência</label><br>
+            <input type="radio" id="perda-peso" name="objetivo" value="perda-peso">
+            <label for="perda-peso">Perda de Peso</label>
+        </div>
+    </div>
+
+    <!-- Botão para enviar o formulário -->
+    <button onclick="exibirResultado()">Gerar Treino</button>
+
+    <!-- Resultados -->
+    <div id="resultado" class="result" style="display:none;">
+        <h2>Treino Personalizado</h2>
+        <p id="treino"></p>
+    </div>
+</div>
+
+<script>
+    function exibirResultado() {
+        // Captura as respostas do cliente
+        var adaptacao = document.querySelector('input[name="adaptacao"]:checked');
+        var somatotipo = document.querySelector('input[name="somatotipo"]:checked');
+        var frequencia = document.querySelector('input[name="frequencia"]:checked');
+        var tipo = document.querySelector('input[name="tipo"]:checked');
+        var experiencia = document.querySelector('input[name="experiencia"]:checked');
+        var objetivo = document.querySelector('input[name="objetivo"]:checked');
+
+        // Valida se todas as perguntas foram respondidas
+        if (!adaptacao || !somatotipo || !frequencia || !tipo || !experiencia || !objetivo) {
+            alert("Por favor, responda todas as perguntas.");
+            return;
+        }
+
+        // Montando o texto do treino com base nas respostas. Aqui entraria a integração com a IA
+        var treino = "Seu treino personalizado é o seguinte:\n\n";
+
+        treino += "Objetivo: " + objetivo.value + "\n";
+        treino += "Tipo de Treino: " + tipo.value + "\n";
+        treino += "Somatotipo: " + somatotipo.value + "\n";
+        treino += "Frequência de treino: " + frequencia.value + " dias por semana\n";
+        treino += "Nível de experiência: " + experiencia.value + "\n";
+
+        // Adicionando a adaptação caso necessário
+        if (adaptacao.value === "sim") {
+            treino += "\nVocê possui necessidades de adaptação, recomendamos que um personal trainer avalie sua condição antes de iniciar os treinos.";
+        }
+
+        // Exibindo o resultado
+        document.getElementById('treino').innerText = treino;
+        document.getElementById('resultado').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
